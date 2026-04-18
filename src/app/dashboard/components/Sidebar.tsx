@@ -1,5 +1,7 @@
 import { getFolders } from '@/app/dashboard/folders/actions'
 import FolderTabs from './FolderTabs'
+import Link from 'next/link'
+import { Sparkles } from 'lucide-react'
 import { logout } from '@/app/login/actions'
 import { Button } from '@/components/ui/button'
 import { createClient } from '@/lib/supabase/server'

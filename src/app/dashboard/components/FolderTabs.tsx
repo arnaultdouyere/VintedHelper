@@ -3,6 +3,8 @@
 import { useState } from 'react'
 import { Folder } from '@/types/schema'
 import FolderTree from './FolderTree'
+import Link from 'next/link'
+import { Sparkles } from 'lucide-react'
 
 export default function FolderTabs({ allFolders }: { allFolders: Folder[] }) {
   const [activeTab, setActiveTab] = useState<'annonce' | 'etude'>('annonce')
@@ -50,6 +52,15 @@ export default function FolderTabs({ allFolders }: { allFolders: Folder[] }) {
           Études
         </button>
       </div>
+
+      {activeTab === 'annonce' && (
+        <div className="px-4 mb-4">
+          <Link href="/dashboard/generate" className="flex items-center justify-center gap-2 w-full bg-slate-900 hover:bg-slate-800 text-white font-medium py-2.5 rounded-xl transition-all shadow-sm border border-slate-700">
+            <Sparkles className="w-4 h-4 text-blue-400" />
+            Générer IA
+          </Link>
+        </div>
+      )}
 
       <div className="flex-1 w-full overflow-y-auto px-2">
          {activeTab === 'annonce' ? (

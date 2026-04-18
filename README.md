@@ -24,6 +24,11 @@ VintedHelper est une application web moderne pour vous aider à créer, stocker 
 ```env
 NEXT_PUBLIC_SUPABASE_URL=votre_url_projet_ici
 NEXT_PUBLIC_SUPABASE_ANON_KEY=votre_clé_anon_ici
+
+# --- MODULE IA (Ajoutez la clé du ou des modèles que vous comptez utiliser) ---
+OPENAI_API_KEY=sk-votre_cle_chatgpt
+GOOGLE_GENERATIVE_AI_API_KEY=votre_cle_gemini
+ANTHROPIC_API_KEY=sk-ant-votre_cle_claude
 ```
 
 ### 3. Lancer en local
