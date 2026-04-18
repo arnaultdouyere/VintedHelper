@@ -22,7 +22,6 @@ export default function FolderTabs({ allFolders }: { allFolders: Folder[] }) {
     return { ...f, type, name: uiName };
   })
 
-  // Sort them so the tree displays alphabetically
   decodedFolders.sort((a,b) => a.name.localeCompare(b.name))
 
   const annoncesFolders = decodedFolders.filter(f => f.type === 'annonce')
@@ -30,44 +29,50 @@ export default function FolderTabs({ allFolders }: { allFolders: Folder[] }) {
 
   return (
     <div className="flex flex-col h-full w-full">
-      <div className="flex p-2 bg-slate-100 rounded-lg mx-4 mb-4 gap-1">
+      {/* Tabs */}
+      <div className="flex px-3 mb-3 gap-1">
         <button
           onClick={() => setActiveTab('annonce')}
-          className={`flex-1 py-1.5 text-xs font-semibold rounded-md transition-colors ${
-            activeTab === 'annonce' 
-              ? 'bg-white shadow-sm text-slate-800' 
-              : 'text-slate-500 hover:text-slate-700'
+          className={`flex-1 py-1.5 text-xs font-semibold rounded-md transition-all ${
+            activeTab === 'annonce'
+              ? 'bg-[#00D4C8]/10 text-[#00D4C8] border border-[#00D4C8]/20'
+              : 'text-slate-500 hover:text-slate-300 hover:bg-white/[0.04]'
           }`}
         >
           Annonces
         </button>
         <button
           onClick={() => setActiveTab('etude')}
-          className={`flex-1 py-1.5 text-xs font-semibold rounded-md transition-colors ${
-            activeTab === 'etude' 
-              ? 'bg-white shadow-sm text-slate-800' 
-              : 'text-slate-500 hover:text-slate-700'
+          className={`flex-1 py-1.5 text-xs font-semibold rounded-md transition-all ${
+            activeTab === 'etude'
+              ? 'bg-[#00D4C8]/10 text-[#00D4C8] border border-[#00D4C8]/20'
+              : 'text-slate-500 hover:text-slate-300 hover:bg-white/[0.04]'
           }`}
         >
           Études
         </button>
       </div>
 
+      {/* Generate AI button — only on annonces tab */}
       {activeTab === 'annonce' && (
-        <div className="px-4 mb-4">
-          <Link href="/dashboard/generate" className="flex items-center justify-center gap-2 w-full bg-slate-900 hover:bg-slate-800 text-white font-medium py-2.5 rounded-xl transition-all shadow-sm border border-slate-700">
-            <Sparkles className="w-4 h-4 text-blue-400" />
+        <div className="px-3 mb-3">
+          <Link
+            href="/dashboard/generate"
+            className="flex items-center justify-center gap-2 w-full bg-[#00D4C8]/10 hover:bg-[#00D4C8]/20 text-[#00D4C8] border border-[#00D4C8]/20 font-medium py-2 rounded-xl transition-all text-sm"
+          >
+            <Sparkles className="w-4 h-4" />
             Générer IA
           </Link>
         </div>
       )}
 
+      {/* Tree */}
       <div className="flex-1 w-full overflow-y-auto px-2">
-         {activeTab === 'annonce' ? (
-           <FolderTree initialFolders={annoncesFolders} folderType="annonce" />
-         ) : (
-           <FolderTree initialFolders={etudesFolders} folderType="etude" />
-         )}
+        {activeTab === 'annonce' ? (
+          <FolderTree initialFolders={annoncesFolders} folderType="annonce" />
+        ) : (
+          <FolderTree initialFolders={etudesFolders} folderType="etude" />
+        )}
       </div>
     </div>
   )

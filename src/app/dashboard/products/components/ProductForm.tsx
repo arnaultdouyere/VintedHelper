@@ -52,109 +52,110 @@ export default function ProductForm({ initialData }: { initialData: ProductPage 
     toast.info("La génération IA sera disponible dans une prochaine version !")
   }
 
+  const statusColors: Record<string, string> = {
+    draft: 'text-slate-400',
+    ready: 'text-[#00D4C8]',
+    archived: 'text-slate-600'
+  }
+
   return (
-    <div className="flex flex-col h-full bg-white">
+    <div className="flex flex-col h-full bg-[#0A0F1E]">
       {/* Header */}
-      <header className="flex items-center justify-between px-8 py-4 border-b border-slate-100 shrink-0 sticky top-0 bg-white z-10">
-        <div className="flex items-center gap-4">
-          <Button variant="ghost" size="icon" onClick={() => router.push(`/dashboard/folders/${data.folder_id}`)}>
-            <ArrowLeft className="w-5 h-5 text-slate-500" />
+      <header className="flex items-center justify-between px-6 py-4 border-b border-white/[0.06] shrink-0 sticky top-0 bg-[#080D1A] z-10">
+        <div className="flex items-center gap-3">
+          <Button variant="ghost" size="icon" onClick={() => router.push(`/dashboard/folders/${data.folder_id}`)} className="text-slate-400 hover:text-white hover:bg-white/[0.06]">
+            <ArrowLeft className="w-5 h-5" />
           </Button>
-          <h1 className="text-xl font-bold text-slate-900 border-none bg-transparent focus:outline-none placeholder-slate-400">
-             Édition de l'annonce
-          </h1>
+          <div>
+            <p className="text-xs text-slate-500 uppercase tracking-wide font-medium">Annonce</p>
+            <h1 className="text-base font-semibold text-white leading-tight truncate max-w-xs">{data.title || 'Sans titre'}</h1>
+          </div>
         </div>
         <div className="flex items-center gap-2">
-          <Button variant="outline" className="text-blue-600 border-blue-200 hover:bg-blue-50" onClick={simulateAi}>
+          <Button variant="ghost" onClick={simulateAi} className="text-[#00D4C8] border border-[#00D4C8]/20 hover:bg-[#00D4C8]/10 text-sm">
             <Sparkles className="w-4 h-4 mr-2" />
             Générer avec l'IA
           </Button>
-          <Button onClick={handleSave} disabled={isSaving} className="bg-blue-600 hover:bg-blue-700">
+          <Button onClick={handleSave} disabled={isSaving} className="bg-[#00D4C8] hover:bg-[#00A89E] text-[#0A0F1E] font-semibold">
             {isSaving ? "Enregistrement..." : <><Save className="w-4 h-4 mr-2" /> Enregistrer</>}
           </Button>
-          <Button variant="ghost" className="text-red-600 hover:bg-red-50" onClick={handleDelete}>
-             <Trash2 className="w-4 h-4" />
+          <Button variant="ghost" onClick={handleDelete} className="text-red-400 hover:text-red-300 hover:bg-red-500/10">
+            <Trash2 className="w-4 h-4" />
           </Button>
         </div>
       </header>
 
-      {/* Main Form */}
+      {/* Form */}
       <div className="flex-1 overflow-y-auto p-8">
-        <div className="max-w-3xl mx-auto space-y-8">
-           
-           <div className="grid gap-6">
-              <div className="space-y-2">
-                 <Label htmlFor="title" className="text-slate-600">Titre de l'annonce</Label>
-                 <Input 
-                   id="title"
-                   className="text-lg py-6"
-                   placeholder="ex: Manteau d'hiver Zara Noir taille M"
-                   value={data.title || ''}
-                   onChange={e => setData({...data, title: e.target.value})}
-                 />
-              </div>
+        <div className="max-w-3xl mx-auto space-y-6">
 
-              <div className="grid grid-cols-2 gap-6">
-                 <div className="space-y-2">
-                    <Label htmlFor="price" className="text-slate-600">Prix (€)</Label>
-                    <Input 
-                      id="price"
-                      type="number"
-                      step="0.01"
-                      placeholder="0.00"
-                      value={data.price || ''}
-                      onChange={e => setData({...data, price: parseFloat(e.target.value)})}
-                    />
-                 </div>
-                 <div className="space-y-2">
-                    <Label htmlFor="status" className="text-slate-600">Statut</Label>
-                    <select 
-                       id="status" 
-                       className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background disabled:cursor-not-allowed disabled:opacity-50"
-                       value={data.status}
-                       onChange={e => setData({...data, status: e.target.value as 'draft'|'ready'|'archived'})}
-                    >
-                       <option value="draft">Brouillon</option>
-                       <option value="ready">Prêt à publier</option>
-                       <option value="archived">Archivé</option>
-                    </select>
-                 </div>
-              </div>
+          <div className="space-y-2">
+            <Label className="text-xs text-slate-400 uppercase tracking-wide">Titre de l'annonce</Label>
+            <Input
+              className="bg-[#0F1629] border-white/[0.08] text-white placeholder:text-slate-600 text-lg py-6 focus:border-[#00D4C8]/50 focus:ring-[#00D4C8]/20"
+              placeholder="ex: Manteau d'hiver Zara Noir taille M"
+              value={data.title || ''}
+              onChange={e => setData({...data, title: e.target.value})}
+            />
+          </div>
 
-              <div className="space-y-2">
-                 <Label htmlFor="description" className="text-slate-600">Description</Label>
-                 <Textarea 
-                   id="description"
-                   className="min-h-[200px] resize-y"
-                   placeholder="Décrivez votre article (matière, état, coupe...)"
-                   value={data.description || ''}
-                   onChange={e => setData({...data, description: e.target.value})}
-                 />
-              </div>
+          <div className="grid grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <Label className="text-xs text-slate-400 uppercase tracking-wide">Prix (€)</Label>
+              <Input
+                type="number"
+                step="0.01"
+                placeholder="0.00"
+                className="bg-[#0F1629] border-white/[0.08] text-white placeholder:text-slate-600 focus:border-[#00D4C8]/50"
+                value={data.price || ''}
+                onChange={e => setData({...data, price: parseFloat(e.target.value)})}
+              />
+            </div>
+            <div className="space-y-2">
+              <Label className="text-xs text-slate-400 uppercase tracking-wide">Statut</Label>
+              <select
+                className="w-full rounded-lg border border-white/[0.08] bg-[#0F1629] px-3 py-2 text-sm text-white focus:outline-none focus:border-[#00D4C8]/50"
+                value={data.status}
+                onChange={e => setData({...data, status: e.target.value as 'draft'|'ready'|'archived'})}
+              >
+                <option value="draft">Brouillon</option>
+                <option value="ready">Prêt à publier</option>
+                <option value="archived">Archivé</option>
+              </select>
+            </div>
+          </div>
 
-              <div className="space-y-2">
-                 <Label htmlFor="hashtags" className="text-slate-600">Hashtags Vinted</Label>
-                 <Textarea 
-                   id="hashtags"
-                   rows={2}
-                   placeholder="#zara #manteau #hiver"
-                   value={data.hashtags || ''}
-                   onChange={e => setData({...data, hashtags: e.target.value})}
-                 />
-              </div>
+          <div className="space-y-2">
+            <Label className="text-xs text-slate-400 uppercase tracking-wide">Description</Label>
+            <Textarea
+              className="bg-[#0F1629] border-white/[0.08] text-white placeholder:text-slate-600 min-h-[200px] resize-y focus:border-[#00D4C8]/50"
+              placeholder="Décrivez votre article (matière, état, coupe...)"
+              value={data.description || ''}
+              onChange={e => setData({...data, description: e.target.value})}
+            />
+          </div>
 
-              <div className="space-y-2">
-                 <Label htmlFor="notes" className="text-slate-600">Notes personnelles (non publiées)</Label>
-                 <Textarea 
-                   id="notes"
-                   rows={3}
-                   className="bg-yellow-50/50 border-yellow-200 focus-visible:ring-yellow-500"
-                   placeholder="Informations sur l'achat, marge visée, défauts cachés..."
-                   value={data.notes || ''}
-                   onChange={e => setData({...data, notes: e.target.value})}
-                 />
-              </div>
-           </div>
+          <div className="space-y-2">
+            <Label className="text-xs text-slate-400 uppercase tracking-wide">Hashtags Vinted</Label>
+            <Textarea
+              rows={2}
+              className="bg-[#0F1629] border-white/[0.08] text-[#00D4C8] placeholder:text-slate-600 focus:border-[#00D4C8]/50"
+              placeholder="#zara #manteau #hiver"
+              value={data.hashtags || ''}
+              onChange={e => setData({...data, hashtags: e.target.value})}
+            />
+          </div>
+
+          <div className="space-y-2">
+            <Label className="text-xs text-slate-400 uppercase tracking-wide">Notes personnelles <span className="normal-case text-slate-600">(non publiées)</span></Label>
+            <Textarea
+              rows={3}
+              className="bg-[#0F1629] border-yellow-900/30 text-slate-300 placeholder:text-slate-600 focus:border-yellow-700/50"
+              placeholder="Informations sur l'achat, marge visée, défauts cachés..."
+              value={data.notes || ''}
+              onChange={e => setData({...data, notes: e.target.value})}
+            />
+          </div>
         </div>
       </div>
     </div>

@@ -38,14 +38,13 @@ export default async function GeneratePage() {
   const annonceFolders = buildFolderPaths(rawAnnonce);
 
   return (
-    <div className="flex flex-col h-full bg-slate-50 overflow-y-auto">
+    <div className="flex flex-col h-full bg-[#0A0F1E] overflow-y-auto">
+      <div className="px-8 py-6 border-b border-white/[0.06] bg-[#080D1A] sticky top-0 z-10">
+         <p className="text-xs text-slate-500 uppercase tracking-widest font-medium mb-1">Module IA</p>
+         <h1 className="text-2xl font-bold text-white tracking-tight">Générateur d'Annonces</h1>
+      </div>
       <div className="p-8">
-         <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight flex items-center gap-2 mb-2">
-            Générateur IA
-         </h1>
-         <p className="text-slate-500 mb-8">
-            Transformez vos photos en annonces Vinted parfaitement rédigées.
-         </p>
+         <p className="text-slate-400 mb-8 text-sm">Transformez vos photos en annonces Vinted parfaitement rédigées.</p>
          
          <GenerateForm folders={annonceFolders} userId={user.id} />
       </div>

@@ -115,8 +115,8 @@ export default function FolderTree({ initialFolders, folderType }: TreeProps) {
 
     return (
       <div key={node.id} className="select-none">
-        <div 
-          className={`flex items-center group rounded-md p-1.5 my-0.5 text-sm hover:bg-slate-100/80 cursor-pointer transition-colors`}
+        <div
+          className={`flex items-center group rounded-md p-1.5 my-0.5 text-sm hover:bg-white/[0.04] cursor-pointer transition-colors`}
           style={{ paddingLeft: `${level * 16 + 8}px` }}
         >
           <button 
@@ -133,13 +133,13 @@ export default function FolderTree({ initialFolders, folderType }: TreeProps) {
           </button>
           
           <Link href={`/dashboard/folders/${node.id}`} className="flex items-center flex-1 overflow-hidden" tabIndex={-1}>
-             {isExpanded || !hasChildren ? <FolderOpen className="w-4 h-4 mr-2 text-blue-500" /> : <FolderIcon className="w-4 h-4 mr-2 text-blue-500" />}
-             <span className="truncate text-slate-700">{node.name}</span>
+             {isExpanded || !hasChildren ? <FolderOpen className="w-4 h-4 mr-2 text-[#00D4C8]" /> : <FolderIcon className="w-4 h-4 mr-2 text-[#00D4C8]/60" />}
+             <span className="truncate text-slate-300 group-hover:text-white transition-colors">{node.name}</span>
           </Link>
           
           <div className="opacity-0 group-hover:opacity-100 transition-opacity ml-auto flex items-center pr-2">
              <DropdownMenu>
-                <DropdownMenuTrigger className="h-6 w-6 p-0 text-slate-400 hover:bg-slate-200 rounded flex items-center justify-center transition-colors">
+                <DropdownMenuTrigger className="h-6 w-6 p-0 text-slate-500 hover:text-[#00D4C8] hover:bg-white/[0.08] rounded flex items-center justify-center transition-colors">
                   <MoreHorizontal className="h-4 w-4" />
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="w-48">
@@ -169,14 +169,14 @@ export default function FolderTree({ initialFolders, folderType }: TreeProps) {
     <div className="flex flex-col gap-2 w-full">
       <div className="px-2 flex items-center justify-between mb-2">
          <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Dossiers</span>
-         <Button variant="ghost" size="icon" className="h-6 w-6 text-slate-400" onClick={() => openDialog('create')}>
+         <Button variant="ghost" size="icon" className="h-6 w-6 text-slate-500 hover:text-[#00D4C8] hover:bg-white/[0.06]" onClick={() => openDialog('create')}>
             <Plus className="w-4 h-4" />
          </Button>
       </div>
 
       <div className="w-full">
          {tree.length === 0 ? (
-           <div className="px-4 py-8 text-center text-sm text-slate-400">
+           <div className="px-4 py-8 text-center text-sm text-slate-600">
              Aucun dossier.
            </div>
          ) : (

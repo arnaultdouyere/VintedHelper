@@ -103,17 +103,17 @@ export default function GenerateForm({ folders, userId }: { folders: Folder[], u
       
       {/* Left side: Images */}
       <div className="space-y-4">
-         <div className="bg-white p-6 rounded-2xl border shadow-sm border-slate-200 min-h-[300px] flex flex-col items-center justify-center text-center relative border-dashed">
+         <div className="bg-[#0F1629] p-6 rounded-2xl border border-dashed border-white/[0.1] min-h-[300px] flex flex-col items-center justify-center text-center relative">
             {isUploading ? (
-               <div className="flex flex-col items-center text-blue-600">
+               <div className="flex flex-col items-center text-[#00D4C8]">
                   <Loader2 className="w-8 h-8 animate-spin mb-2" />
-                  <span>Upload en cours...</span>
+                  <span className="text-sm">Upload en cours...</span>
                </div>
             ) : (
                <div className="text-slate-500">
-                  <ImagePlus className="w-12 h-12 mx-auto mb-4 text-slate-300" />
-                  <p className="font-semibold text-slate-700">Collez une image (Ctrl+V)</p>
-                  <p className="text-sm">Glissez-déposez n'est pas encore actif, utilisez Ctrl+V</p>
+                  <ImagePlus className="w-12 h-12 mx-auto mb-4 text-[#00D4C8]/20" />
+                  <p className="font-semibold text-slate-300">Collez une image (Ctrl+V)</p>
+                  <p className="text-sm text-slate-600">Glissez-déposez n'est pas encore actif</p>
                </div>
             )}
          </div>
@@ -121,7 +121,7 @@ export default function GenerateForm({ folders, userId }: { folders: Folder[], u
          {images.length > 0 && (
             <div className="grid grid-cols-3 gap-3">
                {images.map((url, i) => (
-                  <div key={i} className="relative group rounded-lg overflow-hidden border bg-white aspect-square flex items-center justify-center">
+                  <div key={i} className="relative group rounded-lg overflow-hidden border border-white/[0.06] bg-[#0F1629] aspect-square flex items-center justify-center">
                      {/* eslint-disable-next-line @next/next/no-img-element */}
                      <img src={url} alt="Reference" className="object-cover w-full h-full" />
                      <button onClick={() => removeImage(i)} className="absolute top-2 right-2 p-1 bg-red-500/80 hover:bg-red-500 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
@@ -135,13 +135,13 @@ export default function GenerateForm({ folders, userId }: { folders: Folder[], u
 
       {/* Right side: Options */}
       <div className="space-y-6">
-         <div className="bg-white p-6 border border-slate-200 rounded-2xl shadow-sm space-y-6">
+         <div className="bg-[#0F1629] p-6 border border-white/[0.06] rounded-2xl shadow-sm space-y-6">
             
             <div className="grid grid-cols-2 gap-4">
                <div className="flex flex-col gap-2">
-                  <Label className="text-slate-600 font-medium text-xs uppercase tracking-wide">Modèle IA</Label>
+                  <Label className="text-xs text-slate-400 uppercase tracking-wide">Modèle IA</Label>
                   <select
-                     className="w-full rounded-lg border border-slate-200 bg-white px-3 py-3 text-sm text-slate-800 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors cursor-pointer"
+                     className="w-full rounded-lg border border-white/[0.08] bg-[#080D1A] px-3 py-3 text-sm text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-[#00D4C8]/40 focus:border-[#00D4C8]/50 transition-colors cursor-pointer"
                      value={provider}
                      onChange={e => setProvider(e.target.value)}
                   >
@@ -152,9 +152,9 @@ export default function GenerateForm({ folders, userId }: { folders: Folder[], u
                </div>
                
                <div className="flex flex-col gap-2">
-                  <Label className="text-slate-600 font-medium text-xs uppercase tracking-wide">Dossier de destination</Label>
+                  <Label className="text-xs text-slate-400 uppercase tracking-wide">Dossier de destination</Label>
                   <select
-                     className="w-full rounded-lg border border-slate-200 bg-white px-3 py-3 text-sm text-slate-800 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors cursor-pointer"
+                     className="w-full rounded-lg border border-white/[0.08] bg-[#080D1A] px-3 py-3 text-sm text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-[#00D4C8]/40 focus:border-[#00D4C8]/50 transition-colors cursor-pointer"
                      value={folderId}
                      onChange={e => setFolderId(e.target.value)}
                   >
@@ -167,33 +167,33 @@ export default function GenerateForm({ folders, userId }: { folders: Folder[], u
             </div>
 
             <div className="space-y-2">
-               <Label>Détails supplémentaires (Matière, défauts, taille exacte...)</Label>
+               <Label className="text-xs text-slate-400 uppercase tracking-wide">Détails supplémentaires</Label>
                <Textarea 
                   placeholder="Ex: Le manteau a une petite rayure sur le bouton droit. Taille M mais taille grand."
-                  className="min-h-[120px]"
+                  className="min-h-[120px] bg-[#080D1A] border-white/[0.08] text-white placeholder:text-slate-600 focus:border-[#00D4C8]/50"
                   value={details}
                   onChange={e => setDetails(e.target.value)}
                />
             </div>
             
-            <div className="border border-slate-200 rounded-xl overflow-hidden">
+            <div className="border border-white/[0.06] rounded-xl overflow-hidden">
                <button 
                   onClick={() => setShowPromptOptions(!showPromptOptions)}
-                  className="w-full flex items-center justify-between p-3 bg-slate-50 text-slate-700 text-sm font-medium hover:bg-slate-100 transition-colors"
+                  className="w-full flex items-center justify-between p-3 bg-white/[0.02] text-slate-400 text-sm font-medium hover:bg-white/[0.04] hover:text-slate-300 transition-colors"
                >
                   <span>Personnaliser le Prompt de l'IA (Avancé)</span>
                   {showPromptOptions ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
                </button>
                {showPromptOptions && (
-                  <div className="p-4 bg-white border-t border-slate-200">
+                  <div className="p-4 bg-[#080D1A] border-t border-white/[0.06]">
                      <Textarea 
                         placeholder="Laissez vide pour utiliser le prompt natif."
-                        className="min-h-[150px] text-xs font-mono bg-slate-50"
+                        className="min-h-[150px] text-xs font-mono bg-[#0A0F1E] border-white/[0.08] text-slate-300 placeholder:text-slate-600 focus:border-[#00D4C8]/50"
                         value={customPrompt}
                         onChange={e => setCustomPrompt(e.target.value)}
                      />
-                     <p className="text-xs text-slate-500 mt-2">
-                        Attention : L'IA doit obligatoirement renvoyer un JSON contenant `title`, `description` et `hashtags`.
+                     <p className="text-xs text-slate-600 mt-2">
+                        L'IA doit renvoyer un JSON contenant `title`, `description` et `hashtags`.
                      </p>
                   </div>
                )}
@@ -202,7 +202,7 @@ export default function GenerateForm({ folders, userId }: { folders: Folder[], u
             <Button 
                disabled={isGenerating || images.length === 0 || !folderId} 
                onClick={handleGenerate}
-               className="w-full bg-blue-600 hover:bg-blue-700 py-6 text-base font-semibold shadow-md rounded-xl"
+               className="w-full bg-[#00D4C8] hover:bg-[#00A89E] text-[#0A0F1E] font-bold py-6 text-base shadow-md rounded-xl"
             >
                {isGenerating ? (
                   <><Loader2 className="w-5 h-5 mr-2 animate-spin" /> Analyse des photos et Génération...</>

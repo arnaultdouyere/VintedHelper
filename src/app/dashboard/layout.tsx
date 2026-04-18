@@ -1,5 +1,4 @@
 import Sidebar from '@/app/dashboard/components/Sidebar'
-import { Toaster } from '@/components/ui/sonner'
 
 export default function DashboardLayout({
   children,
@@ -7,15 +6,11 @@ export default function DashboardLayout({
   children: React.ReactNode
 }) {
   return (
-    <div className="min-h-screen flex text-slate-900 bg-slate-50">
+    <div className="min-h-screen flex bg-[#0A0F1E] text-[#E8EBF0]">
       <Sidebar />
-
-      {/* Main Content */}
       <main className="flex-1 flex flex-col h-screen overflow-hidden">
         {children}
       </main>
-
-      <Toaster />
     </div>
   )
 }

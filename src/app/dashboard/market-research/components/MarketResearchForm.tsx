@@ -104,22 +104,23 @@ export default function MarketResearchForm({
   }
 
   return (
-    <div className="flex flex-col h-full bg-slate-50">
-      <header className="flex items-center justify-between px-8 py-4 border-b border-slate-200 shrink-0 sticky top-0 bg-white z-10 shadow-sm">
-        <div className="flex items-center gap-4">
-          <Button variant="ghost" size="icon" onClick={() => router.push(`/dashboard/folders/${data.folder_id}`)}>
-            <ArrowLeft className="w-5 h-5 text-slate-500" />
+    <div className="flex flex-col h-full bg-[#0A0F1E]">
+      <header className="flex items-center justify-between px-6 py-4 border-b border-white/[0.06] shrink-0 sticky top-0 bg-[#080D1A] z-10">
+        <div className="flex items-center gap-3">
+          <Button variant="ghost" size="icon" onClick={() => router.push(`/dashboard/folders/${data.folder_id}`)} className="text-slate-400 hover:text-white hover:bg-white/[0.06]">
+            <ArrowLeft className="w-5 h-5" />
           </Button>
-          <h1 className="text-xl font-bold text-slate-900 border-none bg-transparent focus:outline-none placeholder-slate-400">
-             Étude de marché
-          </h1>
+          <div>
+            <p className="text-xs text-slate-500 uppercase tracking-wide font-medium">Étude de marché</p>
+            <h1 className="text-base font-semibold text-white leading-tight truncate max-w-xs">{data.title || 'Sans titre'}</h1>
+          </div>
         </div>
         <div className="flex items-center gap-2">
-          <Button onClick={handleSave} disabled={isSaving} className="bg-blue-600 hover:bg-blue-700">
+          <Button onClick={handleSave} disabled={isSaving} className="bg-[#00D4C8] hover:bg-[#00A89E] text-[#0A0F1E] font-semibold">
             {isSaving ? "Enregistrement..." : <><Save className="w-4 h-4 mr-2" /> Enregistrer</>}
           </Button>
-          <Button variant="ghost" className="text-red-600 hover:bg-red-50" onClick={handleDelete}>
-             <Trash2 className="w-4 h-4" />
+          <Button variant="ghost" onClick={handleDelete} className="text-red-400 hover:text-red-300 hover:bg-red-500/10">
+            <Trash2 className="w-4 h-4" />
           </Button>
         </div>
       </header>
@@ -128,7 +129,7 @@ export default function MarketResearchForm({
          
          {/* Left Side: Images Carousel / Gallery */}
          <div className="md:w-1/2 flex flex-col gap-4">
-            <div className="bg-white p-4 rounded-xl border border-dashed border-slate-300 min-h-[300px] flex flex-col items-center justify-center text-center">
+            <div className="bg-[#0F1629] p-4 rounded-2xl border border-dashed border-white/[0.1] min-h-[300px] flex flex-col items-center justify-center text-center">
                {isUploading ? (
                   <div className="flex flex-col items-center text-blue-600">
                      <Loader2 className="w-8 h-8 animate-spin mb-2" />
@@ -136,9 +137,9 @@ export default function MarketResearchForm({
                   </div>
                ) : (
                   <div className="text-slate-500">
-                     <ImagePlus className="w-12 h-12 mx-auto mb-4 text-slate-300" />
-                     <p className="font-semibold text-slate-700">Collez une image (Ctrl+V)</p>
-                     <p className="text-sm">pour l'ajouter à la galerie</p>
+                     <ImagePlus className="w-12 h-12 mx-auto mb-4 text-[#00D4C8]/30" />
+                     <p className="font-semibold text-slate-300">Collez une image (Ctrl+V)</p>
+                     <p className="text-sm text-slate-600">pour l'ajouter à la galerie</p>
                   </div>
                )}
             </div>
@@ -146,7 +147,7 @@ export default function MarketResearchForm({
             {images.length > 0 && (
                <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
                   {images.map(img => (
-                     <div key={img.id} className="relative group rounded-lg overflow-hidden border bg-white aspect-square flex items-center justify-center">
+                     <div key={img.id} className="relative group rounded-lg overflow-hidden border border-white/[0.06] bg-[#0F1629] aspect-square flex items-center justify-center">
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img src={img.url} alt="Reference" className="object-cover w-full h-full" />
                         <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
@@ -162,35 +163,37 @@ export default function MarketResearchForm({
 
          {/* Right Side: Form */}
          <div className="md:w-1/2">
-            <div className="bg-white p-6 rounded-xl border shadow-sm grid gap-6">
+            <div className="bg-[#0F1629] p-6 rounded-2xl border border-white/[0.06] shadow-sm grid gap-6">
                <div className="space-y-2">
-                  <Label htmlFor="title" className="text-slate-600">Titre de l'étude *</Label>
+                  <Label className="text-xs text-slate-400 uppercase tracking-wide">Titre de l'étude *</Label>
                   <Input 
                     id="title"
-                    className="text-lg py-6"
+                    className="bg-[#080D1A] border-white/[0.08] text-white placeholder:text-slate-600 text-lg py-6 focus:border-[#00D4C8]/50"
                     placeholder="ex: Manteaux Zara Hiver 2023"
                     value={data.title}
                     onChange={e => setData({...data, title: e.target.value})}
                   />
                </div>
 
-               <div className="grid grid-cols-2 gap-6">
+               <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-2">
-                     <Label htmlFor="price_min" className="text-slate-600">Prix Min (€)</Label>
+                     <Label className="text-xs text-slate-400 uppercase tracking-wide">Prix Min (€)</Label>
                      <Input 
                        id="price_min"
                        type="number"
                        step="0.01"
+                       className="bg-[#080D1A] border-white/[0.08] text-white placeholder:text-slate-600 focus:border-[#00D4C8]/50"
                        value={data.price_min || ''}
                        onChange={e => setData({...data, price_min: parseFloat(e.target.value)})}
                      />
                   </div>
                   <div className="space-y-2">
-                     <Label htmlFor="price_max" className="text-slate-600">Prix Max (€)</Label>
+                     <Label className="text-xs text-slate-400 uppercase tracking-wide">Prix Max (€)</Label>
                      <Input 
                        id="price_max"
                        type="number"
                        step="0.01"
+                       className="bg-[#080D1A] border-white/[0.08] text-white placeholder:text-slate-600 focus:border-[#00D4C8]/50"
                        value={data.price_max || ''}
                        onChange={e => setData({...data, price_max: parseFloat(e.target.value)})}
                      />
@@ -198,20 +201,21 @@ export default function MarketResearchForm({
                </div>
 
                <div className="space-y-2">
-                  <Label htmlFor="source" className="text-slate-600">Lien Source (URL Vinted, etc)</Label>
+                  <Label className="text-xs text-slate-400 uppercase tracking-wide">Lien Source (URL Vinted...)</Label>
                   <Input 
                     id="source"
                     placeholder="https://vinted.fr/..."
+                    className="bg-[#080D1A] border-white/[0.08] text-white placeholder:text-slate-600 focus:border-[#00D4C8]/50"
                     value={data.source_url || ''}
                     onChange={e => setData({...data, source_url: e.target.value})}
                   />
                </div>
 
                <div className="space-y-2">
-                  <Label htmlFor="description" className="text-slate-600">Notes / Analyse</Label>
+                  <Label className="text-xs text-slate-400 uppercase tracking-wide">Notes / Analyse</Label>
                   <Textarea 
                     id="description"
-                    className="min-h-[200px]"
+                    className="min-h-[200px] bg-[#080D1A] border-white/[0.08] text-white placeholder:text-slate-600 focus:border-[#00D4C8]/50"
                     placeholder="Observations sur le marché, la concurrence..."
                     value={data.description || ''}
                     onChange={e => setData({...data, description: e.target.value})}
