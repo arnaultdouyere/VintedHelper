@@ -1,36 +1,44 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# VintedHelper
 
-## Getting Started
+VintedHelper est une application web moderne pour vous aider à créer, stocker et organiser vos annonces Vinted ainsi que vos études de marché.
 
-First, run the development server:
+![VintedHelper](/assets/placeholder)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 📋 Fonctionnalités (Phase 1 MVP)
+- **Authentification Sécurisée** par Supabase.
+- **Arborescence de Dossiers** : Organisez vos recherches et vos brouillons d'annonces de manière infinie.
+- **Annonces (Product Pages)** : Préparez vos fiches avec titre, description complète, hashtags cachés et prix de vente.
+- **Études de Marché** : Copiez-collez facilement des images (Ctrl+V) depuis le web pour vous constituer une base de données de la concurrence.
+- **Images sur le Cloud** : Stockées sur Supabase Storage de manière sécurisée ou publique selon votre choix.
+
+## 🚀 Installation & Lancement
+
+### 1. Backend (Supabase)
+1. Créez un compte gratuit et un projet sur [Supabase](https://supabase.com).
+2. Ouvrez le **SQL Editor** sur votre dashboard Supabase.
+3. Copiez le contenu du fichier `supabase/schema.sql` (situé à la racine de ce dossier) et exécutez-le via l'éditeur SQL.
+   *(Cette étape s'assurera de créer vos tables : `folders`, `product_pages`, `market_research_pages`, `images` ainsi que le bucket de stockage `assets` et toutes les politiques de sécurité (RLS)).*
+
+### 2. Configuration du Projet (`.env`)
+À la racine de ce projet, renommez le fichier `.env.example` en `.env.local` et complétez les informations suivantes que vous trouverez dans les paramètres de votre projet Supabase (Project Settings > API) :
+```env
+NEXT_PUBLIC_SUPABASE_URL=votre_url_projet_ici
+NEXT_PUBLIC_SUPABASE_ANON_KEY=votre_clé_anon_ici
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 3. Lancer en local
+Pour lancer le serveur de développement :
+```bash
+npm install
+npm run dev
+```
+Ouvrez [http://localhost:3000](http://localhost:3000) dans votre navigateur.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🛠️ Stack technique
+- **Frontend** : Next.js 14+ (App Router), React, TailwindCSS.
+- **UI Components** : shadcn/ui.
+- **Base de données / Auth / Storage** : Supabase.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🌍 Déploiement
+Le projet est optimisé pour être déployé sur [Vercel](https://vercel.com).
+Assurez-vous d'ajouter vos variables d'environnement (`NEXT_PUBLIC_SUPABASE_URL` et `NEXT_PUBLIC_SUPABASE_ANON_KEY`) dans les paramètres de Vercel lors de votre déploiement.

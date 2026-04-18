@@ -82,21 +82,14 @@ Le MVP doit inclure :
 
 La logique IA doit être encapsulée pour pouvoir être remplacée facilement plus tard.
 
-## Architecture métier recommandée
-Utiliser une structure claire :
-- `workspace` ou `folder tree`
-- `folders`
-- `product_pages`
-- `market_research_pages`
+## Architecture métier actualisée (V2)
+L'architecture sépare strictement les types de pages :
+- `folders` (Possède la colonne `type: 'annonce' | 'etude'`)
+- `product_pages` (liés aux dossiers 'annonce')
+- `market_research_pages` (liés aux dossiers 'etude')
 - `images`
-- `ai_generations`
 
-Le système doit gérer une hiérarchie parent / enfant pour les dossiers.
-Prévoir les cas d'usage suivants :
-- un dossier racine contient des sous-dossiers
-- un dossier contient plusieurs pages produit
-- déplacement d'une page d'un dossier à un autre
-- duplication d'une page
+Dans l'interface (Sidebar), des onglets permettent de basculer entre l'arbre de dossiers "Annonces" et "Études de marché". Un dossier parent d'un type ("annonce") ne peut contenir que des sous-dossiers ou éléments de ce même type.
 
 ## Écrans minimums à générer
 - landing page sobre
