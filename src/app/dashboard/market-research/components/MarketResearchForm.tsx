@@ -104,8 +104,8 @@ export default function MarketResearchForm({
   }
 
   return (
-    <div className="flex flex-col h-full bg-[#0A0F1E]">
-      <header className="flex items-center justify-between px-6 py-4 border-b border-white/[0.06] shrink-0 sticky top-0 bg-[#080D1A] z-10">
+    <div className="flex flex-col h-full bg-[#1A1D23]">
+      <header className="flex items-center justify-between px-6 py-4 border-b border-white/[0.06] shrink-0 sticky top-0 bg-[#141720] z-10">
         <div className="flex items-center gap-3">
           <Button variant="ghost" size="icon" onClick={() => router.push(`/dashboard/folders/${data.folder_id}`)} className="text-slate-400 hover:text-white hover:bg-white/[0.06]">
             <ArrowLeft className="w-5 h-5" />
@@ -116,7 +116,7 @@ export default function MarketResearchForm({
           </div>
         </div>
         <div className="flex items-center gap-2">
-          <Button onClick={handleSave} disabled={isSaving} className="bg-[#00D4C8] hover:bg-[#00A89E] text-[#0A0F1E] font-semibold">
+          <Button onClick={handleSave} disabled={isSaving} className="bg-[#00D4C8] hover:bg-[#00A89E] text-[#1A1D23] font-semibold">
             {isSaving ? "Enregistrement..." : <><Save className="w-4 h-4 mr-2" /> Enregistrer</>}
           </Button>
           <Button variant="ghost" onClick={handleDelete} className="text-red-400 hover:text-red-300 hover:bg-red-500/10">
@@ -129,7 +129,7 @@ export default function MarketResearchForm({
          
          {/* Left Side: Images Carousel / Gallery */}
          <div className="md:w-1/2 flex flex-col gap-4">
-            <div className="bg-[#0F1629] p-4 rounded-2xl border border-dashed border-white/[0.1] min-h-[300px] flex flex-col items-center justify-center text-center">
+            <div className="bg-[#20242E] p-4 rounded-2xl border border-dashed border-white/[0.1] min-h-[300px] flex flex-col items-center justify-center text-center">
                {isUploading ? (
                   <div className="flex flex-col items-center text-blue-600">
                      <Loader2 className="w-8 h-8 animate-spin mb-2" />
@@ -147,7 +147,7 @@ export default function MarketResearchForm({
             {images.length > 0 && (
                <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
                   {images.map(img => (
-                     <div key={img.id} className="relative group rounded-lg overflow-hidden border border-white/[0.06] bg-[#0F1629] aspect-square flex items-center justify-center">
+                     <div key={img.id} className="relative group rounded-lg overflow-hidden border border-white/[0.06] bg-[#20242E] aspect-square flex items-center justify-center">
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img src={img.url} alt="Reference" className="object-cover w-full h-full" />
                         <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
@@ -163,12 +163,12 @@ export default function MarketResearchForm({
 
          {/* Right Side: Form */}
          <div className="md:w-1/2">
-            <div className="bg-[#0F1629] p-6 rounded-2xl border border-white/[0.06] shadow-sm grid gap-6">
+            <div className="bg-[#20242E] p-6 rounded-2xl border border-white/[0.06] shadow-sm grid gap-6">
                <div className="space-y-2">
                   <Label className="text-xs text-slate-400 uppercase tracking-wide">Titre de l'étude *</Label>
                   <Input 
                     id="title"
-                    className="bg-[#080D1A] border-white/[0.08] text-white placeholder:text-slate-600 text-lg py-6 focus:border-[#00D4C8]/50"
+                    className="bg-[#141720] border-white/[0.08] text-white placeholder:text-slate-600 text-lg py-6 focus:border-[#00D4C8]/50"
                     placeholder="ex: Manteaux Zara Hiver 2023"
                     value={data.title}
                     onChange={e => setData({...data, title: e.target.value})}
@@ -182,7 +182,7 @@ export default function MarketResearchForm({
                        id="price_min"
                        type="number"
                        step="0.01"
-                       className="bg-[#080D1A] border-white/[0.08] text-white placeholder:text-slate-600 focus:border-[#00D4C8]/50"
+                       className="bg-[#141720] border-white/[0.08] text-white placeholder:text-slate-600 focus:border-[#00D4C8]/50"
                        value={data.price_min || ''}
                        onChange={e => setData({...data, price_min: parseFloat(e.target.value)})}
                      />
@@ -193,7 +193,7 @@ export default function MarketResearchForm({
                        id="price_max"
                        type="number"
                        step="0.01"
-                       className="bg-[#080D1A] border-white/[0.08] text-white placeholder:text-slate-600 focus:border-[#00D4C8]/50"
+                       className="bg-[#141720] border-white/[0.08] text-white placeholder:text-slate-600 focus:border-[#00D4C8]/50"
                        value={data.price_max || ''}
                        onChange={e => setData({...data, price_max: parseFloat(e.target.value)})}
                      />
@@ -205,7 +205,7 @@ export default function MarketResearchForm({
                   <Input 
                     id="source"
                     placeholder="https://vinted.fr/..."
-                    className="bg-[#080D1A] border-white/[0.08] text-white placeholder:text-slate-600 focus:border-[#00D4C8]/50"
+                    className="bg-[#141720] border-white/[0.08] text-white placeholder:text-slate-600 focus:border-[#00D4C8]/50"
                     value={data.source_url || ''}
                     onChange={e => setData({...data, source_url: e.target.value})}
                   />
@@ -215,7 +215,7 @@ export default function MarketResearchForm({
                   <Label className="text-xs text-slate-400 uppercase tracking-wide">Notes / Analyse</Label>
                   <Textarea 
                     id="description"
-                    className="min-h-[200px] bg-[#080D1A] border-white/[0.08] text-white placeholder:text-slate-600 focus:border-[#00D4C8]/50"
+                    className="min-h-[200px] bg-[#141720] border-white/[0.08] text-white placeholder:text-slate-600 focus:border-[#00D4C8]/50"
                     placeholder="Observations sur le marché, la concurrence..."
                     value={data.description || ''}
                     onChange={e => setData({...data, description: e.target.value})}

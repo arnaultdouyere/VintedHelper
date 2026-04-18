@@ -44,9 +44,9 @@ export default async function FolderPage({ params }: { params: Promise<{ id: str
   const isAnnonce = folderType === 'annonce'
 
   return (
-    <div className="flex flex-col h-full bg-[#0A0F1E] overflow-y-auto">
+    <div className="flex flex-col h-full bg-[#1A1D23] overflow-y-auto">
       {/* Header */}
-      <div className="flex items-center justify-between px-8 py-6 border-b border-white/[0.06] bg-[#080D1A] sticky top-0 z-10">
+      <div className="flex items-center justify-between px-8 py-6 border-b border-white/[0.06] bg-[#141720] sticky top-0 z-10">
         <div>
           <p className="text-xs text-slate-500 uppercase tracking-widest font-medium mb-1">
             {isAnnonce ? 'Annonces' : 'Études de marché'}
@@ -60,7 +60,7 @@ export default async function FolderPage({ params }: { params: Promise<{ id: str
               const page = await createProductPage(resolvedParams.id)
               redirect(`/dashboard/products/${page.id}`)
             }}>
-              <Button type="submit" className="bg-[#00D4C8] hover:bg-[#00A89E] text-[#0A0F1E] font-semibold rounded-xl px-5">
+              <Button type="submit" className="bg-[#00D4C8] hover:bg-[#00A89E] text-[#1A1D23] font-semibold rounded-xl px-5">
                 <Plus className="w-4 h-4 mr-2" />
                 Nouvelle Annonce
               </Button>
@@ -98,7 +98,7 @@ export default async function FolderPage({ params }: { params: Promise<{ id: str
                 href={isAnnonce ? `/dashboard/products/${item.id}` : `/dashboard/market-research/${item.id}`}
                 className="block group"
               >
-                <div className="p-5 border border-white/[0.06] rounded-2xl bg-[#0F1629] hover:border-[#00D4C8]/30 hover:bg-[#00D4C8]/[0.03] transition-all duration-200 flex flex-col h-full relative overflow-hidden cursor-pointer">
+                <div className="p-5 border border-white/[0.06] rounded-2xl bg-[#20242E] hover:border-[#00D4C8]/30 hover:bg-[#00D4C8]/[0.03] transition-all duration-200 flex flex-col h-full relative overflow-hidden cursor-pointer">
                   {/* Teal top bar on hover */}
                   <div className="absolute top-0 left-0 w-full h-0.5 bg-[#00D4C8] opacity-0 group-hover:opacity-100 transition-opacity" />
                   

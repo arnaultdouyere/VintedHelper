@@ -14,7 +14,7 @@ export default async function Sidebar() {
     .order('name', { ascending: true })
 
   return (
-    <aside className="w-64 border-r border-white/[0.06] bg-[#080D1A] h-screen flex flex-col">
+    <aside className="w-64 border-r border-white/[0.06] bg-[#141720] h-screen flex flex-col">
       {/* Logo */}
       <Link href="/dashboard" className="flex items-center gap-3 px-5 py-5 border-b border-white/[0.06] hover:bg-white/[0.02] transition-colors">
         <Image
